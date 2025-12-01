@@ -37,48 +37,48 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-background">
       {/* Sidebar */}
-      <aside className="fixed inset-y-0 left-0 z-50 w-64 bg-sidebar border-r border-sidebar-border">
+      <aside className="fixed inset-y-0 left-0 z-50 w-64 bg-sidebar border-r border-sidebar-border shadow-lg">
         <div className="flex h-full flex-col">
           {/* Logo */}
-          <div className="flex h-16 items-center gap-3 border-b border-sidebar-border px-6">
-            <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-              <Building2 className="h-6 w-6 text-primary" />
+          <div className="flex h-20 items-center gap-3 px-6 border-b border-sidebar-border/50">
+            <div className="h-11 w-11 rounded-xl bg-gradient-primary flex items-center justify-center shadow-lg">
+              <Building2 className="h-6 w-6 text-white" />
             </div>
             <div>
               <h1 className="text-lg font-bold text-sidebar-foreground">HR System</h1>
-              <p className="text-xs text-sidebar-foreground/60 capitalize">{userRole}</p>
+              <p className="text-xs text-sidebar-foreground/60 capitalize font-medium">{userRole}</p>
             </div>
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 space-y-1 px-3 py-4">
+          <nav className="flex-1 space-y-1 px-3 py-6">
             {navigation.map((item) => (
               <NavLink
                 key={item.name}
                 to={item.href}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+                  `group flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 ${
                     isActive
-                      ? 'bg-sidebar-accent text-sidebar-accent-foreground'
-                      : 'text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground'
+                      ? 'bg-gradient-primary text-white shadow-lg scale-[1.02]'
+                      : 'text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground hover:scale-[1.02]'
                   }`
                 }
               >
                 <item.icon className="h-5 w-5" />
-                {item.name}
+                <span>{item.name}</span>
               </NavLink>
             ))}
           </nav>
 
           {/* Sign Out */}
-          <div className="border-t border-sidebar-border p-4">
+          <div className="border-t border-sidebar-border/50 p-4">
             <Button
-              variant="outline"
-              className="w-full justify-start gap-3 border-sidebar-border hover:bg-sidebar-accent"
+              variant="ghost"
+              className="w-full justify-start gap-3 text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground rounded-xl h-11 transition-all duration-200"
               onClick={signOut}
             >
               <LogOut className="h-5 w-5" />
-              Sign Out
+              <span>Sign Out</span>
             </Button>
           </div>
         </div>
@@ -86,7 +86,7 @@ export function Layout({ children }: LayoutProps) {
 
       {/* Main Content */}
       <main className="pl-64">
-        <div className="container mx-auto p-8">
+        <div className="container mx-auto p-8 max-w-7xl">
           {children}
         </div>
       </main>
